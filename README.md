@@ -1,8 +1,8 @@
-# 🛡️ Project AccessDenied v2.0
+# 🛡️ Project AccessDenied
 
 **An autonomous Cyber-Physical Security Operations Center (SOC) triangulating IT network threats, OT process anomalies, and perimeter deception in real-time.**
 
-Project AccessDenied v2.0 is an enterprise-grade SOC dashboard engineered to protect Cyber-Physical Systems (CPS) and critical infrastructure (e.g., Water Treatment Plants). Recognizing the vulnerability of modern industrial networks, this platform correlates threat intelligence across three distinct attack vectors to eliminate alert fatigue and detect zero-day anomalies with zero latency.
+Project AccessDenied is an enterprise-grade SOC dashboard engineered to protect Cyber-Physical Systems (CPS) and critical infrastructure (e.g., Water Treatment Plants). Recognizing the vulnerability of modern industrial networks, this platform correlates threat intelligence across three distinct attack vectors to eliminate alert fatigue and detect zero-day anomalies with zero latency.
 
 ---
 
@@ -93,7 +93,7 @@ Our unsupervised, edge-deployable models were calibrated to prioritize **Recall*
 
 
 
-🎯 What It Does (The Business Value)
+## 🎯 What It Does (The Business Value)
 Modern critical infrastructure—like water treatment plants and power grids—operates in two overlapping worlds: the digital IT network (computers, servers) and the physical OT process (valves, pumps). Traditionally, these are monitored by separate teams, leading to blind spots.
 
 AccessDenied unifies these worlds into a single, autonomous command center.
@@ -104,21 +104,21 @@ Correlates Cyber-Physical Threats: It instantly answers the most critical questi
 
 Automates Triage: Instead of forcing an analyst to interpret raw graphs during a crisis, the system autonomously translates anomalies into immediate, actionable mitigation steps (e.g., "Sever IT/OT network bridges" or "Transition valves to manual override").
 
-⚙️ How It Works (Under the Hood)
+## ⚙️ How It Works (Under the Hood)
 The platform operates on a decoupled, high-throughput data pipeline that processes information in four continuous stages:
 
-Step 1: Data Ingestion (The Digital Twin)
+**Step 1: Data Ingestion (The Digital Twin)**
 Because deploying physical Programmable Logic Controllers (PLCs) at a hackathon is unfeasible, the FastAPI backend acts as a Software-in-the-Loop (SIL) Digital Twin. It continuously streams complex SCADA telemetry (tank levels, pump statuses) and deep-packet IT network logs, simulating a live industrial environment with zero latency.
 
-Step 2: Dual-Engine Machine Learning Inference
+**Step 2: Dual-Engine Machine Learning Inference**
 The backend routes the incoming telemetry through two specialized, unsupervised AI models:
 
 The IT Engine (Isolation Forest): Slices through highly dimensional network traffic to isolate fast-moving digital anomalies, such as DDoS attempts or port scans.
 
 The OT Engine (One-Class SVM): Applies a 7-hour time-series smoothing window to the physical water plant data. It profiles the "steady state" of the plant to detect slow, methodical physical tampering that traditional threshold alarms miss.
 
-Step 3: Perimeter Deception & NSM Logging
+**Step 3: Perimeter Deception & NSM Logging**
 Simultaneously, the backend manages a simulated Conpot/Docker ICS Honeypot on port 8080 and streams simulated Zeek Network Security Monitor (weird.log) outputs. Any IP address that interacts with the Honeypot is instantly logged as a high-fidelity critical threat, bypassing the ML models entirely.
 
-Step 4: Deterministic Edge-Logic (The UI)
+**Step 4: Deterministic Edge-Logic (The UI)**
 The React frontend asynchronously polls these backend states. Instead of relying on slow, hallucination-prone Large Language Models (LLMs) to write incident reports, the frontend utilizes an Autonomous Edge-Logic Engine. Using strict Boolean rules, the dashboard instantaneously triangulates the IT, OT, and Deception vectors to shift UI colors and render predefined, auditable threat intelligence with zero API latency.
