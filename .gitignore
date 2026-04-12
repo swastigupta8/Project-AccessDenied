@@ -1,0 +1,9 @@
+node_modules/
+__pycache__/
+*.csv
+*.pkl
+.env
+venv/
+__pycache__/
+*.pyc
+.vscode/

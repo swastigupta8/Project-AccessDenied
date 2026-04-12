@@ -1,0 +1,16 @@
+.github
+.vscode
+.coveragerc
+.gitignore
+.landscape.yaml
+.travis.yaml
+.venv
+.pytest_cache
+
+**/__pycache__
+
+Changelog.txt
+docker-compose.xml
+Dockerfile
+LICENSE.txt
+Makefile
