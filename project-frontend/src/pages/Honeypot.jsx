@@ -15,13 +15,13 @@ const IPCard = ({ ip, index, total, radiusPercent, isCritical, globalRotation })
 
   return (
     <div
-      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85px] md:w-[95px] h-[85px] md:h-[95px] rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 backdrop-blur-md cursor-default
-        ${isCritical ? 'bg-red-950/60 border border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.2)] z-20' : 'bg-black/80 border border-white/5 z-10 hover:scale-105'}`}
+      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70px] md:w-[90px] h-[70px] md:h-[90px] rounded-xl flex flex-col items-center justify-center gap-1 transition-all duration-300 backdrop-blur-md cursor-default
+        ${isCritical ? 'bg-red-950/60 border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.3)] z-20' : 'bg-black/80 border border-white/5 z-10 hover:scale-105'}`}
       style={{ left: `calc(50% + ${xOffset}%)`, top: `calc(50% + ${yOffset}%)` }}
     >
       <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${isCritical ? 'bg-red-500 animate-pulse shadow-[0_0_10px_#ef4444]' : ''}`} style={{ backgroundColor: !isCritical ? dotColor : undefined }} />
-      <span className={`font-mono text-[8px] md:text-[9px] font-bold text-center leading-tight ${isCritical ? 'text-red-300' : 'text-gray-300'}`}>{ip}</span>
-      <span className={`font-mono text-[7px] md:text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${isCritical ? 'bg-red-500/20 text-red-500' : 'bg-white/5 text-gray-400'}`}>
+      <span className={`font-mono text-[7px] md:text-[8px] font-bold text-center leading-tight ${isCritical ? 'text-red-300' : 'text-gray-300'}`}>{ip}</span>
+      <span className={`font-mono text-[6px] md:text-[7px] font-bold px-1.5 md:px-2 py-0.5 rounded-full uppercase tracking-wider ${isCritical ? 'bg-red-500/20 text-red-500' : 'bg-white/5 text-gray-400'}`}>
         {isCritical ? 'Critical' : 'Monitor'}
       </span>
     </div>
@@ -75,8 +75,11 @@ const Honeypot = () => {
                 <div key={i} className="absolute rounded-full border border-white/5 pointer-events-none" style={{ width: `${100 * scale}%`, height: `${100 * scale}%` }} />
               ))}
 
-              {/* Sweeper Line */}
-              <div className="absolute w-[50%] h-[2px] bg-gradient-to-r from-transparent via-orange-600/40 to-transparent origin-left pointer-events-none" style={{ transform: `rotate(${rotation * 2}deg)` }} />
+              {/* Sweeper Line (FIXED CENTERING) */}
+              <div 
+                className="absolute left-1/2 top-1/2 w-[50%] h-[2px] bg-gradient-to-r from-transparent via-orange-600/40 to-transparent origin-left pointer-events-none" 
+                style={{ transform: `translate(0, -50%) rotate(${rotation * 2}deg)` }} 
+              />
 
               {/* Orbiting IPs */}
               <div className="absolute inset-0">
@@ -119,7 +122,7 @@ const Honeypot = () => {
               
               <div className="flex-1 overflow-y-auto">
                 <table className="w-full text-left font-sans text-xs">
-                  <thead className="sticky top-0 bg-[#0a0a0a]">
+                  <thead className="sticky top-0 bg-[#0a0a0a] z-10">
                     <tr>
                       <th className="p-3 md:p-4 font-mono text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest border-b border-white/5">Time</th>
                       <th className="p-3 md:p-4 font-mono text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest border-b border-white/5">Source IP</th>
