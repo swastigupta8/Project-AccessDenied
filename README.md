@@ -84,20 +84,11 @@ AccessDenied integrates three security layers into a single platform:
 
 ---
 
-## 📸 Screenshots (Add Yours Here)
+## 📸 Screenshots
 <img width="1919" height="1024" alt="image" src="https://github.com/user-attachments/assets/f1845f65-e8ea-427f-beba-615dfbda0602" />
 <img width="1919" height="1026" alt="image" src="https://github.com/user-attachments/assets/1968d9e4-c409-4856-be30-ca7db6667ae2" />
 <img width="1919" height="1032" alt="image" src="https://github.com/user-attachments/assets/fad9e471-254b-4de8-8831-567cef0d6683" />
 <img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/db83fc46-a414-4728-8637-5d11e7afa678" />
-
----
-
-## 🏗️ System Architecture (Add Diagram)
-
-Recommended diagram flow:
-
-Telemetry → FastAPI Backend → ML Models → Edge Logic → React Dashboard
-
 
 ---
 
