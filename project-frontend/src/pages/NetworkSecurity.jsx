@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar.jsx';
 import ThreatLevelBox from '../components/ThreatLevelBox.jsx';
 import axios from 'axios';
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -28,7 +28,7 @@ const NetworkSecurity = () => {
   useEffect(() => {
     const fetchZeek = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/api/zeek/logs`);
+        const res = await axios.get(`${API_BASE}/api/network/simulated-telemetry`);
         setZeekLogs(res.data || []);
       } catch (err) {}
     };
@@ -38,12 +38,16 @@ const NetworkSecurity = () => {
   }, []);
 
   useEffect(() => {
+    // Was: client-side Math.random() labeled as "Isolation Forest" output.
+    // Now calls the real trained model via /api/network/stream.
     const fetchData = async () => {
-      const isSpike = Math.random() > 0.85;
-      const threat = isSpike ? Math.floor(Math.random() * 40) + 60 : Math.floor(Math.random() * 15);
-      const status = threat > 80 ? 'HIGH' : threat > 50 ? 'MEDIUM' : 'LOW';
-      setNetworkData({ threat_confidence: threat, status });
-      setChartData(prev => [...prev.slice(-20), { time: new Date().toLocaleTimeString([], { hour12: false }), network: threat }]);
+      try {
+        const res = await axios.get(`${API_BASE}/api/network/stream`);
+        if (res?.data && !res.data.error) {
+          setNetworkData(res.data);
+          setChartData(prev => [...prev.slice(-20), { time: new Date().toLocaleTimeString([], { hour12: false }), network: res.data.threat_confidence }]);
+        }
+      } catch (err) {}
     };
     fetchData();
     const interval = setInterval(() => { if (isLive) fetchData(); }, 3000);
@@ -108,7 +112,7 @@ const NetworkSecurity = () => {
             <div className="flex-1 flex flex-col bg-neutral-900/30 border border-white/5 rounded-2xl overflow-hidden min-h-[200px]">
               <div className="p-4 border-b border-white/5 bg-black/20 flex items-center shrink-0">
                 <div className="flex items-center gap-2 text-cyan-500 font-mono text-[10px] font-bold uppercase tracking-widest">
-                  <Activity size={14} /> Zeek: weird.log
+                  <Activity size={14} /> Simulated Network Events (Demo)
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto p-2">

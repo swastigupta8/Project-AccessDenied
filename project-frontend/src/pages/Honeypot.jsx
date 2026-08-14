@@ -3,7 +3,7 @@ import { Lock, AlertTriangle, Crosshair } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
 import axios from 'axios';
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
 const HONEYPOT_PORT = 8080;
 const DOT_COLORS = ['#e8450e', '#a855f7', '#3b82f6', '#22c55e', '#f59e0b', '#06b6d4'];
 
